@@ -30,7 +30,10 @@ async def wait_page_load(page: Page, timeout: int = 30 * MS1000) -> bool:
     """等待页面加载完成（检测页面是否有商品）"""
     logger.info('等待购物车页面加载...')
     return await wait_for_selector(
-        page=page, selector='xpath=//div[starts-with(@class,"vendors-item")]', timeout=timeout
+        # page=page, selector='xpath=//div[starts-with(@class,"vendors-item")]', timeout=timeout
+        page=page,
+        selector='xpath=//input[@max]',
+        timeout=timeout,
     )
 
 
@@ -79,7 +82,12 @@ async def parse_cart(page: Page) -> CartProducts:
             )
         )
         i_pnk: str = parse_pnk(await i_url_a.get_attribute('href', timeout=MS1000))  # type: ignore
-        i_qty: int = int(await i_qty_input.get_attribute('max', timeout=MS1000))  # type: ignore
+        try:
+            # NOTICE 有的捆绑产品会提示 Acest pachet de produse nu mai este disponibil 此产品捆绑销售不再提供，此时是找不到 qty 的
+            i_qty: int = int(await i_qty_input.get_attribute('max', timeout=MS1000))  # type: ignore
+        except PlaywrightError as pe:
+            logger.warning(f'定位不到第 {i+1} 个捆绑商品的 qty，可能是不再可售\n{pe}')
+            i_qty = 0
         logger.debug(f'解析到商品 "{i_pnk}" "{i_qty}"')
         result.add(CartProduct(i_pnk, i_qty))
 
