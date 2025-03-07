@@ -5,8 +5,8 @@ description = "eMAG 库存监控"
 authors = [{ name = "ukk119", email = "jdycty2002@163.com" }]
 requires-python = "^3.13"
 dependencies = [
-    "scraper-utils @ https://github.com/kuku119/scraper-utils/releases/download/v1.0.4/scraper_utils-1.0.4-py3-none-any.whl",
     "loguru (>=0.7.3,<0.8.0)",
+    "scraper-utils @ https://github.com/kuku119/scraper-utils/releases/download/v1.0.4/scraper_utils-1.0.4-py3-none-any.whl",
 ]
 
 [tool.poetry]
