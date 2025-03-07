@@ -43,7 +43,9 @@ async def main():
 
         input('打开产品列表页...')
         list_page = await bc.new_page()
-        await list_page.goto('https://www.emag.ro/jocuri-societate/c', wait_until='networkidle')
+        # await list_page.goto('https://www.emag.ro/jocuri-societate/c', wait_until='networkidle')
+        # await list_page.goto('https://www.emag.ro/vendors/vendor/visionvt', wait_until='networkidle')
+        await list_page.goto('https://www.emag.ro/vendors/vendor/yrisfprk', wait_until='networkidle')
         # await list_page.goto('https://www.emag.ro/vendors/vendor/dbtmrgei', wait_until='networkidle')
         await wait_list_page_load(list_page)
 

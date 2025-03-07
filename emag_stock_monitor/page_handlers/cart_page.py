@@ -96,6 +96,7 @@ async def parse_cart(page: Page) -> CartProducts:
 
 async def clear_cart(page: Page) -> None:
     """清空购物车"""
+    # WARNING 尝试点击第一个 Sterge 时需要重试很多次才会成功
     logger.info('清空购物车')
 
     # TODO 是否需要判断清空完成？

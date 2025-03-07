@@ -21,7 +21,7 @@ async def wait_page_load(page: Page, expect_count: int = 60, timeout: float = 10
     while True:
         # 超时退出
         if perf_counter() - start_time > timeout:
-            logger.error(f'等待页面 "{page.url}" 加载失败，时间超时')
+            logger.warning(f'等待页面 "{page.url}" 加载超时')
             return False
 
         # 统计产品卡片数量
